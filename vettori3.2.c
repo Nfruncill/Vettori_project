@@ -1,5 +1,4 @@
-//implementare un algoritmo di spostamento del vettore
-
+//implementare un algoritmo che trasformi i numeri negativi in positivi e quelli negativi in positivi
 
 
  #include <stdio.h>
@@ -19,6 +18,25 @@
         printf("Inserisci numeri");
         scanf("%d",&vettore[i]);
     }
+}
+
+void ruota_a_sinistra_il_vettore(int vettore[],int dim)
+{
+    int tmp = vettore[0];
+    int i;
+    for ( i = 0; i < dim - 1 ; i++)
+        vettore[i] = vettore[i+1];
+    vettore[dim-1] = tmp;
+}
+
+
+int somma_vettore(int vettore[],int dim){
+    int somma = 0;
+    for(int i=0;i<dim;i++){
+     somma = somma + vettore[i];
+    }
+
+    return somma;
 }
 
 
@@ -282,7 +300,7 @@ int main(){
    int scelta_di_rifare = 0;
    int scelta_dal_menu;
    int dato_da_cercare,numero_posizione = 0,media_del_vettore;
-   int valore_da_controllare,valore_controllato;
+   int valore_da_controllare,valore_controllato,variabile_somma,numero;
 
    printf("inserisci dimensione vettore");
    scanf("%d",&dim);
@@ -318,12 +336,16 @@ do{
      printf("9) Carica vettore con numeri casuali\n");
      printf("10) Controlla caratteri ripetuti\n");
      printf("11) Copia il vettore\n");
+     printf("12) Somma elementi del vettore\n");
+     printf("13) Sposta gli elementi del vettore\n");
      printf("0)Termina\n");
 
       printf("\n");
 
        printf("Scegli dal menu di sopra\n");
        scanf("%d",&scelta_dal_menu);
+
+        printf("\n");
 
 
        switch (scelta_dal_menu)
@@ -336,7 +358,7 @@ do{
         scanf("%d",&dato_da_cercare);                                   
         ricerca(vettore,dim,dato_da_cercare);
            printf("\n");
-        //printf("il valore %d e stato trovato alla posizione n.%d\n",dato_da_cercare,numero_posizione);
+        
           
 
      break;
@@ -380,6 +402,20 @@ break;
 case 11:
 copia_vettore(vettore,dim);
 break;
+case 12:
+variabile_somma = somma_vettore(vettore,dim);
+printf("la somma degli elementi del vettore e pari a: %d",variabile_somma);
+printf("\n");
+break;
+case 13:
+printf("Di quante posizioni si intende girare il vettore");
+scanf("%d",&numero);
+ for (int i = 0; i < numero ; i++)
+    {
+        ruota_a_sinistra_il_vettore(vettore,dim);
+    }
+    stampa(vettore,dim);
+    break;
  case 0:
    out:
 return 0;
