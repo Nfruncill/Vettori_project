@@ -2,13 +2,15 @@
 
 
 
-
-
  #include <stdio.h>
  #include <time.h>
  #include <stdlib.h>
 
  #define _Bool var = 0
+  int dim;
+
+
+ 
 
 
 
@@ -18,6 +20,55 @@
         scanf("%d",&vettore[i]);
     }
 }
+
+
+
+void stampa_copia_vettore(int vettore_copia[],int dim,int vettore[]){
+    
+
+
+    printf("----------------Primo Vettore---------------------\n");
+
+    printf("\n");
+    printf("\n");
+
+    for(int i=0;i<dim;i++){
+        printf("vettore[%d] = %d \n",i, vettore[i]);
+    }
+
+
+    printf("\n");
+    printf("\n");
+
+
+
+    printf("----------------Secondo Vettore---------------------\n");
+
+    for(int i=0;i<dim;i++){
+        printf("vettore[%d] = %d \n",i, vettore_copia[i]);
+    }
+
+       
+
+}
+
+
+
+
+
+
+void copia_vettore(int vettore[],int dim){
+
+     int vettore_copia[dim];
+    
+
+    for(int i=0;i<dim;i++){
+       
+    vettore_copia[i] = vettore[i];
+    }
+    stampa_copia_vettore(vettore_copia,dim,vettore);
+}
+
 
 
 
@@ -226,12 +277,16 @@ int conta_elementi_presenti(int vettore[],int dim,int valore_da_controllare){
 
 int main(){
 
-   int dim;
+  
 
    int scelta_di_rifare = 0;
    int scelta_dal_menu;
    int dato_da_cercare,numero_posizione = 0,media_del_vettore;
    int valore_da_controllare,valore_controllato;
+
+   printf("inserisci dimensione vettore");
+   scanf("%d",&dim);
+   int vettore[dim];
 
    
   
@@ -239,9 +294,7 @@ int main(){
 
     
 
-        printf("Inserisci dimensione");
-        scanf("%d",&dim);
-        int vettore[dim];
+      
         
 
 
@@ -264,6 +317,7 @@ do{
      printf("8) Sostituisci elemento\n");
      printf("9) Carica vettore con numeri casuali\n");
      printf("10) Controlla caratteri ripetuti\n");
+     printf("11) Copia il vettore\n");
      printf("0)Termina\n");
 
       printf("\n");
@@ -294,7 +348,7 @@ do{
    case 4:
    media_del_vettore = media(vettore,dim);
 
-   printf("la media del vettore e %d",media_del_vettore);
+   printf("la media (Intera) del vettore e %d",media_del_vettore);
 
    break;
    case 5:
@@ -322,6 +376,9 @@ printf("Inserisci il valore da controllare");
 scanf("%d",&valore_da_controllare);
 valore_controllato = conta_elementi_presenti(vettore,dim,valore_da_controllare);
 printf("l'elemento %d e ripetuto nell'array %d volte",valore_da_controllare,valore_controllato);
+break;
+case 11:
+copia_vettore(vettore,dim);
 break;
  case 0:
    out:
