@@ -2,15 +2,17 @@
 
 
 
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-
-#define _Bool var = 0
 
 
+ #include <stdio.h>
+ #include <time.h>
+ #include <stdlib.h>
 
-void caricamento(int vettore[],int dim){
+ #define _Bool var = 0
+
+
+
+ void caricamento(int vettore[],int dim){
     for(int i=0; i<dim;i++){
         printf("Inserisci numeri");
         scanf("%d",&vettore[i]);
@@ -138,6 +140,15 @@ void sostituisci_elemento(int vettore[],int dim){
 
    printf("Inserisci l'elemento da sostituire\n");
    scanf("%d",&nuovo_elemento);
+
+     int i = 0;
+
+    while ((vettore[i]!=nuovo_elemento)&&(i<dim))
+    i++;
+
+
+   if(vettore[i]==nuovo_elemento){
+   
    posizione_di_elemento_da_sostituire = ricerca_per_scambio(vettore,dim,nuovo_elemento);
 
    printf("Inserisci il valore da sostituire");
@@ -146,17 +157,30 @@ void sostituisci_elemento(int vettore[],int dim){
 
     var_temp = posizione_di_elemento_da_sostituire;
     dim1 = posizione_di_elemento_da_sostituire;
+    
 
    for(int i=0; i<=dim1; i++){
     
 
     vettore[dim1] = valore_da_Posizionare;
 
+   }
+
 
    
 
-     
-   }
+
+    }
+    else{
+        printf("\n");
+        printf("elemento non trovato");
+        printf("\n");
+    }
+   
+
+
+
+
 
 
 
