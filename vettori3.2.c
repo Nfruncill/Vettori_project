@@ -1,15 +1,18 @@
-//implementare un algoritmo che trasformi i numeri negativi in positivi e quelli negativi in positivi
-
+//implementare un algoritmo che trasformi i numeri negativi in positivi )ok
+//implementare il movimento verso destra del vettore )ok
+//trovare il numero maggiore e minore dell'array )ok
+//implmentare algoritmo pari e dispari )ok
 
  #include <stdio.h>
  #include <time.h>
  #include <stdlib.h>
+ #include <math.h>
 
  #define _Bool var = 0
   int dim;
 
 
- 
+
 
 
 
@@ -20,14 +23,15 @@
     }
 }
 
-void ruota_a_sinistra_il_vettore(int vettore[],int dim)
-{
-    int tmp = vettore[0];
-    int i;
-    for ( i = 0; i < dim - 1 ; i++)
-        vettore[i] = vettore[i+1];
-    vettore[dim-1] = tmp;
-}
+
+
+
+
+
+
+
+
+
 
 
 int somma_vettore(int vettore[],int dim){
@@ -181,12 +185,51 @@ int media(int vettore[],int dim){
 
 
 
+
+
 void stampa(int vettore[],int dim){
     for (int i = 0; i < dim; i++)
     {
-        printf("vettore[%d] = %d \n",i, vettore[i]);
+        printf("posizione [%d]  = %d ",i, vettore[i]);
+        printf("\n");
+        printf("\n");
     }
     
+}
+
+
+void pari(int vettore[],int dim){
+    for(int i=0;i<dim;i++){
+        if(vettore[i]%2==0){
+    
+            printf("l'elemento in posizione %d e pari!\n",i);
+        }
+        else{
+            printf("l'elemento in posizione %d e dispari!\n",i);
+        }
+    }
+}
+
+void ruota_a_sinistra_il_vettore(int vettore[],int dim)
+{
+    int temp = vettore[0];
+
+
+for(int i=0;i<dim-1;i++){
+    vettore[i] = vettore[i+1];
+}
+vettore[dim-1] = temp;
+
+    
+}
+
+void ruota_vettore_a_destra(int vettore[],int dim){
+    int temp = vettore[dim-1];
+for(int i=dim-1;i>0;i--){
+    vettore[i] = vettore[i-1];
+}
+vettore[0] = temp;
+
 }
 
 
@@ -272,6 +315,19 @@ srand(time(0));
 
 }
 
+void carica_elementi_a_caso_negativi(int vettore[], int dim){
+
+srand(time(0)); 
+
+	for(int i = 0; i < dim; i++){
+	   vettore[i]=-100+rand()%100; //numeri casuali tra 1 e 100
+	   
+   	}
+
+    stampa(vettore,dim);
+
+}
+
 
 int conta_elementi_presenti(int vettore[],int dim,int valore_da_controllare){
     int contatore_volte_valore = 0;
@@ -289,6 +345,61 @@ int conta_elementi_presenti(int vettore[],int dim,int valore_da_controllare){
 }
 
 
+void numeri_positivi_negativi(int vettore[],int dim){   //qui
+    for(int i=0;i<dim;i++){
+        if(vettore[i]<0){
+            vettore[i] = abs(vettore[i]);
+        }
+
+    }
+        
+    
+    stampa(vettore,dim);
+}
+
+
+
+void maggiore(int vettore[],int dim){
+    int MAX = 0;
+    for(int i=0;i<dim;i++){
+        if (i==0) {
+             MAX=vettore[i]; 
+             } 
+
+             if(vettore[i]>MAX) 
+             MAX=vettore[i]; 
+             
+    }
+    printf("Il massimo elemento del vettore è pari a: %d",MAX);
+    printf("\n");
+     printf("\n");
+
+    stampa(vettore,dim);
+}
+
+
+void minore(int vettore[],int dim){
+      int MIN = 0;
+    for(int i=0;i<dim;i++){
+        if (i==0) {
+             MIN=vettore[i]; 
+             } 
+
+             if(vettore[i]<MIN) 
+             MIN=vettore[i]; 
+             
+    }
+    printf("L'elemento più piccolo del vettore è pari a: %d",MIN);
+    printf("\n");
+     printf("\n");
+
+    stampa(vettore,dim);
+
+}
+
+
+
+
 
 
 
@@ -301,6 +412,7 @@ int main(){
    int scelta_dal_menu;
    int dato_da_cercare,numero_posizione = 0,media_del_vettore;
    int valore_da_controllare,valore_controllato,variabile_somma,numero;
+   int numero1;
 
    printf("inserisci dimensione vettore");
    scanf("%d",&dim);
@@ -337,7 +449,12 @@ do{
      printf("10) Controlla caratteri ripetuti\n");
      printf("11) Copia il vettore\n");
      printf("12) Somma elementi del vettore\n");
-     printf("13) Sposta gli elementi del vettore\n");
+     printf("13) Sposta gli elementi del vettore(Verso Sinistra)\n");
+     printf("14) Trasforma i numeri del vettore in positivo\n");
+     printf("15) Carica vettore con numeri negativi(Random)\n");
+     printf("16) Sposta gli elementi del vettore(Verso Destra)\n");
+     printf("17) Visualizza elemento piu grande del vettore\n");
+     printf("18) Visualizza elemento piu piccolo del vettore\n");
      printf("0)Termina\n");
 
       printf("\n");
@@ -415,6 +532,31 @@ scanf("%d",&numero);
         ruota_a_sinistra_il_vettore(vettore,dim);
     }
     stampa(vettore,dim);
+    break;
+    case 14:
+    numeri_positivi_negativi(vettore,dim); // qui
+    break;
+    case 15:
+    carica_elementi_a_caso_negativi(vettore,dim);
+    break;
+    case 16:
+    printf("Di quante posizioni si intende girare il vettore");
+    scanf("%d",&numero1);
+    for (int i = 0; i < numero1 ; i++)
+    {
+        ruota_vettore_a_destra(vettore,dim);
+    }
+     stampa(vettore,dim);
+    
+    break;
+    case 17:
+    maggiore(vettore,dim);
+    break;
+    case 18:
+    minore(vettore,dim);
+    break;
+    case 19:
+    pari(vettore,dim);
     break;
  case 0:
    out:
