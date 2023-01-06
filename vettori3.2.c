@@ -455,6 +455,7 @@ do{
      printf("16) Sposta gli elementi del vettore(Verso Destra)\n");
      printf("17) Visualizza elemento piu grande del vettore\n");
      printf("18) Visualizza elemento piu piccolo del vettore\n");
+     printf("19) Visualizza valori pari e dispari\n");
      printf("0)Termina\n");
 
       printf("\n");
