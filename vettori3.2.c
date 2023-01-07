@@ -1,15 +1,16 @@
-//implementare un algoritmo che trasformi i numeri negativi in positivi )ok
-//implementare il movimento verso destra del vettore )ok
-//trovare il numero maggiore e minore dell'array )ok
-//implmentare algoritmo pari e dispari )ok
+//con il secondo vettore copiato crearne un terzo ed unirlo con il vettore orginale
+
 
  #include <stdio.h>
  #include <time.h>
  #include <stdlib.h>
  #include <math.h>
 
- #define _Bool var = 0
   int dim;
+   int dimensione;
+
+
+
 
 
 
@@ -45,7 +46,8 @@ int somma_vettore(int vettore[],int dim){
 
 
 
-void stampa_copia_vettore(int vettore_copia[],int dim,int vettore[]){
+
+void stampa_copia_vettore(int vettore_secondario_da_riempire[],int dim,int vettore[]){
     
 
 
@@ -66,30 +68,26 @@ void stampa_copia_vettore(int vettore_copia[],int dim,int vettore[]){
 
     printf("----------------Secondo Vettore---------------------\n");
 
+      printf("\n");
+
     for(int i=0;i<dim;i++){
-        printf("vettore[%d] = %d \n",i, vettore_copia[i]);
+        printf("vettore[%d] = %d \n",i, vettore_secondario_da_riempire[i]);
     }
 
-       
 
-}
-
-
-
-
-
-
-void copia_vettore(int vettore[],int dim){
-
-     int vettore_copia[dim];
     
 
-    for(int i=0;i<dim;i++){
+ 
+
        
-    vettore_copia[i] = vettore[i];
-    }
-    stampa_copia_vettore(vettore_copia,dim,vettore);
+
 }
+
+
+
+
+
+
 
 
 
@@ -370,11 +368,12 @@ void maggiore(int vettore[],int dim){
              MAX=vettore[i]; 
              
     }
+    stampa(vettore,dim);
     printf("Il massimo elemento del vettore è pari a: %d",MAX);
     printf("\n");
      printf("\n");
 
-    stampa(vettore,dim);
+    
 }
 
 
@@ -389,13 +388,80 @@ void minore(int vettore[],int dim){
              MIN=vettore[i]; 
              
     }
+     stampa(vettore,dim);
     printf("L'elemento più piccolo del vettore è pari a: %d",MIN);
     printf("\n");
      printf("\n");
 
-    stampa(vettore,dim);
+   
 
 }
+
+
+
+
+void unisci_i_vettori(int vettore[],int vettore_secondario_da_riempire[],int dim,int dimensione){
+
+
+int j=0,i=0;
+   dimensione = dim * 2;
+    int vettore_unione[dimensione];
+
+
+    for(int i = 0; i < dim; i++){
+        vettore_unione[j] = vettore[i];
+        j = j+1;
+    }
+    
+    for(int i = 0; i < dim; i++){
+        vettore_unione[j] = vettore_secondario_da_riempire[i];
+        j = j+1;
+    }
+
+    printf("\n");
+    printf("------------------------------VETTORE UNITO 1 E 2 Vettore--------------------------\n");
+
+    for(int i=0;i<dimensione;i++){
+  printf("vettore[%d] = %d \n",i, vettore_unione[i]);
+  
+}
+
+}
+
+void carica_secondo_vettore_1(int vettore_secondario_da_riempire[],int dim){
+    for(int i=0; i<dim;i++){
+        printf("Inserisci numeri");
+        scanf("%d",&vettore_secondario_da_riempire[i]);
+        printf("\n");
+    }
+}
+
+void caricamento_secondo_vettore(int vettore[],int vettore_secondario_da_riempire[],int dim){
+    int scelta = 0;
+    carica_secondo_vettore_1(vettore_secondario_da_riempire,dim);
+    unisci_i_vettori(vettore,vettore_secondario_da_riempire,dim,dimensione);
+
+
+}
+
+
+
+
+
+void copia_vettore(int vettore[],int dim){
+
+     int vettore_copia[dim];
+    
+
+    for(int i=0;i<dim;i++){
+       
+    vettore_copia[i] = vettore[i];
+    }
+    stampa_copia_vettore(vettore_copia,dim,vettore);
+
+
+}
+
 
 
 
@@ -413,10 +479,14 @@ int main(){
    int dato_da_cercare,numero_posizione = 0,media_del_vettore;
    int valore_da_controllare,valore_controllato,variabile_somma,numero;
    int numero1;
+  
 
    printf("inserisci dimensione vettore");
    scanf("%d",&dim);
    int vettore[dim];
+  int vettore_copia[dimensione];
+     int vettore_secondario_da_riempire[dim];
+ 
 
    
   
@@ -456,6 +526,7 @@ do{
      printf("17) Visualizza elemento piu grande del vettore\n");
      printf("18) Visualizza elemento piu piccolo del vettore\n");
      printf("19) Visualizza valori pari e dispari\n");
+     printf("20) Unisci i vettori\n");
      printf("0)Termina\n");
 
       printf("\n");
@@ -558,6 +629,9 @@ scanf("%d",&numero);
     break;
     case 19:
     pari(vettore,dim);
+    break;
+    case 20:
+   caricamento_secondo_vettore(vettore,vettore_secondario_da_riempire,dim);
     break;
  case 0:
    out:
