@@ -1,4 +1,4 @@
-//con il secondo vettore copiato crearne un terzo ed unirlo con il vettore orginale
+
 
 
  #include <stdio.h>
@@ -8,6 +8,8 @@
 
   int dim;
    int dimensione;
+   int scelta_secondo_vettore;
+   int scelta_di_rifare = 0;
 
 
 
@@ -81,6 +83,12 @@ void stampa_copia_vettore(int vettore_secondario_da_riempire[],int dim,int vetto
 
        
 
+}
+
+void stampa_secondo_vettore(int vettore_secondario_da_riempire[],int dim){
+     for(int i=0;i<dim;i++){
+        printf("vettore[%d] = %d \n",i, vettore_secondario_da_riempire[i]);
+    }
 }
 
 
@@ -227,6 +235,15 @@ for(int i=dim-1;i>0;i--){
     vettore[i] = vettore[i-1];
 }
 vettore[0] = temp;
+
+}
+
+void ruota_vettore_a_destra_secondo_vettore(int vettore_secondario_da_riempire[],int dim){
+    int temp = vettore_secondario_da_riempire[dim-1];
+for(int i=dim-1;i>0;i--){
+    vettore_secondario_da_riempire[i] = vettore_secondario_da_riempire[i-1];
+}
+vettore_secondario_da_riempire[0] = temp;
 
 }
 
@@ -428,6 +445,8 @@ int j=0,i=0;
 
 }
 
+
+
 void carica_secondo_vettore_1(int vettore_secondario_da_riempire[],int dim){
     for(int i=0; i<dim;i++){
         printf("Inserisci numeri");
@@ -448,16 +467,18 @@ void caricamento_secondo_vettore(int vettore[],int vettore_secondario_da_riempir
 
 
 
-void copia_vettore(int vettore[],int dim){
 
-     int vettore_copia[dim];
+
+void copia_vettore(int vettore[],int vettore_secondario_da_riempire[],int dim){
+
+     
     
 
     for(int i=0;i<dim;i++){
        
-    vettore_copia[i] = vettore[i];
+    vettore_secondario_da_riempire[i] = vettore[i];
     }
-    stampa_copia_vettore(vettore_copia,dim,vettore);
+    stampa_copia_vettore(vettore_secondario_da_riempire,dim,vettore);
 
 
 }
@@ -473,13 +494,15 @@ void copia_vettore(int vettore[],int dim){
 int main(){
 
   
-
-   int scelta_di_rifare = 0;
+//agguingere cambia memoria tramite richiamo main();
+   
    int scelta_dal_menu;
    int dato_da_cercare,numero_posizione = 0,media_del_vettore;
    int valore_da_controllare,valore_controllato,variabile_somma,numero;
    int numero1;
+   int media_2 = 0;
   
+
 
    printf("inserisci dimensione vettore");
    scanf("%d",&dim);
@@ -517,7 +540,7 @@ do{
      printf("8) Sostituisci elemento\n");
      printf("9) Carica vettore con numeri casuali\n");
      printf("10) Controlla caratteri ripetuti\n");
-     printf("11) Copia il vettore\n");
+     printf("11) Copia il vettore e istanzia il secondo vettore\n");
      printf("12) Somma elementi del vettore\n");
      printf("13) Sposta gli elementi del vettore(Verso Sinistra)\n");
      printf("14) Trasforma i numeri del vettore in positivo\n");
@@ -527,7 +550,10 @@ do{
      printf("18) Visualizza elemento piu piccolo del vettore\n");
      printf("19) Visualizza valori pari e dispari\n");
      printf("20) Unisci i vettori\n");
-     printf("0)Termina\n");
+     printf("21) Gestisci il secondo vettore\n");
+     printf("22) Stampa il secondo vettore\n");
+     printf("23) Cambia dimensione\n");
+     printf("333)Termina\n");
 
       printf("\n");
 
@@ -589,7 +615,7 @@ valore_controllato = conta_elementi_presenti(vettore,dim,valore_da_controllare);
 printf("l'elemento %d e ripetuto nell'array %d volte",valore_da_controllare,valore_controllato);
 break;
 case 11:
-copia_vettore(vettore,dim);
+copia_vettore(vettore,vettore_secondario_da_riempire,dim);
 break;
 case 12:
 variabile_somma = somma_vettore(vettore,dim);
@@ -632,11 +658,121 @@ scanf("%d",&numero);
     break;
     case 20:
    caricamento_secondo_vettore(vettore,vettore_secondario_da_riempire,dim);
+   //se il vettore_secondarioe gia pieno procedere direttamente con l'unione dei 2 vettori
+
     break;
- case 0:
-   out:
-return 0;
-break;
+
+    case 21:
+
+   
+
+     do{
+
+
+     printf("1) Carica vettore con dei numeri\n");
+     printf("2) Riempi il vettore con numeri casuali\n");
+     printf("3) Visualizza elemento piu grande del vettore\n");
+     printf("4) Visualizza elemento piu piccolo del vettore\n");
+     printf("5) Visualizza valori pari e dispari\n");
+     printf("6) Svuota il vettore\n");
+     printf("7) Ottieni media\n");
+     printf("8) Stampa Vettore\n");
+     printf("9) Ordina vettore(Crescente)\n");
+     printf("10) Ordina vettore(Decrescente)\n");
+     printf("300) Esci e istanzia di nuovo il vettore\n");
+
+     printf("Scegli");
+     scanf("%d",&scelta_secondo_vettore);
+
+     switch (scelta_secondo_vettore)
+     { //da qui tutto con il secondo vettore
+     case 1:
+     //carica_secondo_vettore_1(vettore_secondario_da_riempire,dim);
+     caricamento(vettore_secondario_da_riempire,dim);
+
+        break;
+        case 2:
+
+        carica_elementi_a_caso(vettore_secondario_da_riempire,dim);
+
+       stampa_secondo_vettore(vettore_secondario_da_riempire,dim);
+
+       break;
+
+       case 3:
+    
+          maggiore(vettore_secondario_da_riempire,dim);
+
+          break;
+
+          case 4:
+
+          minore(vettore_secondario_da_riempire,dim);
+
+          break;
+
+          case 5:
+          pari(vettore_secondario_da_riempire,dim);
+
+          break;
+
+          case 6:
+          svuota_vettore(vettore_secondario_da_riempire,dim);
+          break;
+
+          case 7:
+          media_2 = media(vettore_secondario_da_riempire,dim);
+
+          printf("la media del secondo vettore e pari a: %d\n",media_2);
+
+          break;
+
+          case 8:
+
+          stampa_secondo_vettore(vettore_secondario_da_riempire,dim);
+
+          break;
+
+          case 9:
+
+          ordina(vettore_secondario_da_riempire,dim);
+          stampa_secondo_vettore(vettore_secondario_da_riempire,dim);
+
+          break;
+
+          case 10:
+
+          ordina_reverse(vettore_secondario_da_riempire,dim);
+          stampa_secondo_vettore(vettore_secondario_da_riempire,dim);
+
+          break;
+
+          case 300:
+          main();
+          break;
+
+
+     default:
+     printf("errore nella scelta\n");
+        break;
+     }
+     
+     }
+     while (scelta_di_rifare == 0);
+
+     case 22:
+     stampa(vettore_secondario_da_riempire,dim);
+     break;
+
+     case 23:
+     main();
+     break;
+     
+     
+    case 333:
+     exit(0);
+   return 0;
+     break;
 
        default:
         printf("\n");
