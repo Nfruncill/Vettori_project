@@ -238,14 +238,7 @@ vettore[0] = temp;
 
 }
 
-void ruota_vettore_a_destra_secondo_vettore(int vettore_secondario_da_riempire[],int dim){
-    int temp = vettore_secondario_da_riempire[dim-1];
-for(int i=dim-1;i>0;i--){
-    vettore_secondario_da_riempire[i] = vettore_secondario_da_riempire[i-1];
-}
-vettore_secondario_da_riempire[0] = temp;
 
-}
 
 
 
